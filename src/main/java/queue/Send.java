@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 public class Send {
 
-    private final static String QUEUE_NAME = "hello";
+    private final static String QUEUE_NAME = "my-queue";
 
     public static void main(String[] argv) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
