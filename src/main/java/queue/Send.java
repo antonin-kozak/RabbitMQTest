@@ -1,9 +1,10 @@
+package queue;
+
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
 import java.nio.charset.StandardCharsets;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.stream.IntStream;
 
 public class Send {
@@ -18,16 +19,16 @@ public class Send {
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             String message = "Hello World!";
             IntStream.range(0, 10)
-                            .parallel()
-                            .forEach(i -> {
-                                try {
-                                    String m = message + "_"+i;
-                                    channel.basicPublish("", QUEUE_NAME, null, m.getBytes(StandardCharsets.UTF_8));
-                                    System.out.println(" [x] Sent '" + m + "'");
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            });
+                    .parallel()
+                    .forEach(i -> {
+                        try {
+                            String m = message + "_" + i;
+                            channel.basicPublish("", QUEUE_NAME, null, m.getBytes(StandardCharsets.UTF_8));
+                            System.out.println(" [x] Sent '" + m + "'");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
         }
     }
 }
